@@ -1,10 +1,12 @@
 const express = require('express');
 const manager = require('./manager')
+const cors = require('cors');
 
 
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/characters", async(req, res)=>{
    const data = await manager.loadCharacter();

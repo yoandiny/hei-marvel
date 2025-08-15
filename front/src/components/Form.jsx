@@ -91,7 +91,7 @@ const Form = ({formMode}) => {
         <input type="text" name='realName' placeholder="Nom de naissance" value={editForm.realName} onChange={handleEditChange} />
         <label htmlFor="universe">Univers</label>
         <input type="text" name='universe' placeholder="Univers" value={editForm.universe} onChange={handleEditChange} />
-        <button type="submit">Modifier</button>
+        <button onClick={updateCharacter} type="submit">Modifier</button>
       </form>
     );
   }

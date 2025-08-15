@@ -2,8 +2,25 @@ import { useEffect, useState } from "react";
 import './styles/List.css';
 import axios from 'axios'
 
-const List = ()=> {
+const List = ({setFormMode})=> {
     const [data, setData] = useState([]);
+
+    const setModificationMode = async(id) => {
+        
+        try {
+            const res = await axios.get(`http://localhost:8080/characters/${id}`);
+        if(res.status === 200){
+            setFormMode("update");
+            localStorage.setItem("character", JSON.stringify(res.data));
+        }
+        } catch (error) {
+            console.error("Error fetching character for modification:", error);
+            if(error.response && error.response.data) {
+                console.error("Error details:", error.response.data);
+            }
+            
+        }
+    }
   
 
     const getCharacters = async () =>{
@@ -57,8 +74,8 @@ const List = ()=> {
                         <td>{character.realName}</td>
                         <td>{character.universe}</td>
                         <td>
-                            <button onClick={() => console.log(`Edit ${character.id}`)}><i class='bx bx-pencil'></i></button>
-                            <button onClick={() => console.log(`Delete ${character.id}`)}> <i class='bx bx-trash' ></i></button>
+                            <button onClick={() => setModificationMode(character.id)}><i class='bx bx-pencil'></i></button>
+                            <button onClick={() => deleteCharacter(character.id)}> <i class='bx bx-trash' ></i></button>
                         </td>
                     </tr>
                 ))}

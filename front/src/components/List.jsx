@@ -38,10 +38,13 @@ const List = ({setFormMode})=> {
     }
 
     const deleteCharacter = async (id) => {
+        
         try {
-            const res = await axios.delete(`http://localhost:8080/characters/${id}`);
-            if(res.status === 200){
-                setData(data.filter(character => character.id !== id));
+            if(window.confirm("Voulez vous vraiment supprimer ce personnage ?")){
+                const res = await axios.delete(`http://localhost:8080/characters/${id}`);
+                if(res.status === 200){
+                    getCharacters();
+                }
             }
         } catch (error) {
             console.error("Error deleting character:", error);

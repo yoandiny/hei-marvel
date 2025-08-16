@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <List setFormMode={setFormMode} />
-      <Form formMode={formMode} />
+      <Form formMode={formMode} setFormMode={setFormMode} />
     </>
   )
 }

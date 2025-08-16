@@ -2,7 +2,7 @@ import { use, useState } from 'react';
 import './styles/Form.css'
 import axios from 'axios';
 
-const Form = ({formMode}) => {
+const Form = ({formMode, setFormMode}) => {
     const [editingCharacter] = useState(JSON.parse(localStorage.getItem("character")) || {});
     const [editForm, setEditForm] = useState({
         name: editingCharacter.name || '',
@@ -92,6 +92,7 @@ const Form = ({formMode}) => {
         <label htmlFor="universe">Univers</label>
         <input type="text" name='universe' placeholder="Univers" value={editForm.universe} onChange={handleEditChange} />
         <button onClick={updateCharacter} type="submit">Modifier</button>
+        <button onClick={()=>setFormMode("create")} type='submit'>Annuler</button>
       </form>
     );
   }
